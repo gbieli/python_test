@@ -7,12 +7,8 @@ class APIHandler:
         req = requests.get(url)
         print("Status: " + str(req.status_code))
         data = req.json()
-        print(data)
-        print(data["date"])
-        for k in data:
-            strK = str(k)
-            print(str(k) + ": " + data[strK])
-
+        for k, v in data.items():
+            print(str(k) + ": " + str(v))
 
 #apihandler = APIHandler("http://ip.jsontest.com/")
 apihandler = APIHandler("http://date.jsontest.com/")
