@@ -1,8 +1,9 @@
 # comment
 import requests
-from http.server import HTTPServer
-from http.server import BaseHTTPRequestHandler
+# from http.server import HTTPServer
+# from http.server import BaseHTTPRequestHandler
 from xml.etree import ElementTree
+import tkinter as tk
 
 class JSONAPIHandler:
     def __init__(self, url):
@@ -31,6 +32,31 @@ class XMLAPIHandler:
         req = requests.get(url)
         root = ElementTree.fromstring(req.content)
         for child in root:
-            print(child.tag, child.text)
+            print("Tag: " + child.tag, "\n  Text: " + child.text)
 
 xmlapihandler = XMLAPIHandler("http://www.w3schools.com/xml/note.xml")
+
+import tkinter as tk
+
+class Application(tk.Frame):
+    def __init__(self, master=None):
+        tk.Frame.__init__(self, master)
+        self.pack()
+        self.createWidgets()
+
+    def createWidgets(self):
+        self.hi_there = tk.Button(self)
+        self.hi_there["text"] = "Hello World\n(click me)"
+        self.hi_there["command"] = self.say_hi
+        self.hi_there.pack(side="top")
+
+        self.QUIT = tk.Button(self, text="QUIT", fg="red",
+                                            command=root.destroy)
+        self.QUIT.pack(side="bottom")
+
+    def say_hi(self):
+        print("hi there, everyone!")
+
+root = tk.Tk()
+app = Application(master=root)
+app.mainloop()
