@@ -2,9 +2,9 @@
 import requests
 from http.server import HTTPServer
 from http.server import BaseHTTPRequestHandler
+from xml.etree import ElementTree
 
-
-class APIHandler:
+class JSONAPIHandler:
     def __init__(self, url):
         req = requests.get(url)
         print("Status: " + str(req.status_code))
@@ -13,15 +13,24 @@ class APIHandler:
             print(str(k) + ": " + str(v))
 
 #apihandler = APIHandler("http://ip.jsontest.com/")
-apihandler = APIHandler("http://date.jsontest.com/")
+apihandler = JSONAPIHandler("http://date.jsontest.com/")
 
-class HTTPServer:
-    def __init__(self):
-        self.run()
+# class HTTPServer:
+#     def __init__(self):
+#         self.run()
+#
+#     def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
+#         server_address = ('', 8000)
+#         httpd = server_class(server_address, handler_class)
+#         httpd.serve_forever()
+#
+# server = HTTPServer()
 
-    def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
-        server_address = ('', 8000)
-        httpd = server_class(server_address, handler_class)
-        httpd.serve_forever()
+class XMLAPIHandler:
+    def __init__(self, url):
+        req = requests.get(url)
+        root = ElementTree.fromstring(req.content)
+        for child in root:
+            print(child.tag, child.text)
 
-server = HTTPServer()
+xmlapihandler = XMLAPIHandler("http://www.w3schools.com/xml/note.xml")
