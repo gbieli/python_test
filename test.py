@@ -3,14 +3,21 @@ import requests
 # from http.server import BaseHTTPRequestHandler
 from xml.etree import ElementTree
 import tkinter as tk
+import sys
+import re
+from pathlib import Path
+from time import localtime
 
 class JSONAPIHandler:
     def __init__(self, url):
-        req = requests.get(url)
-        print("Status: " + str(req.status_code))
-        data = req.json()
-        for k, v in data.items():
-            print(str(k) + ": " + str(v))
+        try:
+            req = requests.get(url)
+            print("Status: " + str(req.status_code))
+            data = req.json()
+            for k, v in data.items():
+                print(str(k) + ": " + str(v))
+        except:
+            print("Unexpected error:", sys.exc_info()[0])
 
 #apihandler = APIHandler("http://ip.jsontest.com/")
 apihandler = JSONAPIHandler("http://date.jsontest.com/")
@@ -56,6 +63,20 @@ class Application(tk.Frame):
     def say_hi(self):
         print("hi there, everyone!")
 
-root = tk.Tk()
-app = Application(master=root)
-app.mainloop()
+#root = tk.Tk()
+#app = Application(master=root)
+#app.mainloop()
+
+#name = input('What is your name?\n')
+#print('Hi, %s.' % name)
+
+friends = ['john', 'pat', 'gary', 'michael']
+for i, name in enumerate(friends):
+    print("iteration {iteration} is {name}".format(iteration=i, name=name))
+
+# p = Path('/')
+# for x in p.iterdir():
+#     if x.is_dir():
+#         print(x)
+
+print(localtime())
