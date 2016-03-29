@@ -7,6 +7,7 @@ import sys
 import re
 from pathlib import Path
 from time import localtime
+import socket
 
 class JSONAPIHandler:
     def __init__(self, url):
@@ -80,3 +81,14 @@ for i, name in enumerate(friends):
 #         print(x)
 
 print(localtime())
+
+try:
+    ip = socket.gethostbyname("www.google.ch")
+    sock = socket.socket()
+    ip_port = (ip, 80)
+    print("IP: " + str(ip_port[0]), "Port: " + str(ip_port[1]))
+    result = sock.connect_ex(ip_port)
+    print("Result: ", str(result))
+    sock.close()
+except:
+    print("Unexpected error:", sys.exc_info()[0], sys.exc_info()[1])
