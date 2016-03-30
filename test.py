@@ -9,6 +9,7 @@ from pathlib import Path
 from time import localtime
 import socket
 
+
 class JSONAPIHandler:
     def __init__(self, url):
         try:
@@ -20,8 +21,10 @@ class JSONAPIHandler:
         except:
             print("Unexpected error:", sys.exc_info()[0])
 
-#apihandler = APIHandler("http://ip.jsontest.com/")
+
+# apihandler = APIHandler("http://ip.jsontest.com/")
 apihandler = JSONAPIHandler("http://date.jsontest.com/")
+
 
 # class HTTPServer:
 #     def __init__(self):
@@ -41,9 +44,11 @@ class XMLAPIHandler:
         for child in root:
             print("Tag: " + child.tag, "\n  Text: " + child.text)
 
+
 xmlapihandler = XMLAPIHandler("http://www.w3schools.com/xml/note.xml")
 
 import tkinter as tk
+
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -58,18 +63,19 @@ class Application(tk.Frame):
         self.hi_there.pack(side="top")
 
         self.QUIT = tk.Button(self, text="QUIT", fg="red",
-                                            command=root.destroy)
+                              command=root.destroy)
         self.QUIT.pack(side="bottom")
 
     def say_hi(self):
         print("hi there, everyone!")
 
-#root = tk.Tk()
-#app = Application(master=root)
-#app.mainloop()
 
-#name = input('What is your name?\n')
-#print('Hi, %s.' % name)
+# root = tk.Tk()
+# app = Application(master=root)
+# app.mainloop()
+
+# name = input('What is your name?\n')
+# print('Hi, %s.' % name)
 
 friends = ['john', 'pat', 'gary', 'michael']
 for i, name in enumerate(friends):
